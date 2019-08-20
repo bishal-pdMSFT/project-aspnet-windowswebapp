@@ -6,6 +6,10 @@
 trigger:
 - master
 
+variables:
+  # Azure Resource Manager connection
+  azureSubscription: 'fd11448c-c8d5-444d-9ed5-7bd46db9ea11'
+
 stages:
 - stage: Build
   displayName: Build stage
@@ -55,7 +59,7 @@ stages:
           - task: AzureWebApp@1
             displayName: 'Azure Web App Deploy'
             inputs:
-              azureSubscription: 'fd11448c-c8d5-444d-9ed5-7bd46db9ea11'
+              azureSubscription: $(azureSubscription)
               appType: webApp
               appName: 'bishalwebappspn1'
               package: $(Pipeline.Workspace)/drop/$(Build.BuildId).zip
